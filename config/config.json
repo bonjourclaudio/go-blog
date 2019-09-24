@@ -1,0 +1,8 @@
+{
+  "ENVIRONMENT": "Development",
+  "PORT":8080,
+  "DB_HOST":"127.0.0.1",
+  "DB_NAME":"goblogdb",
+  "DB_USERNAME":"dev",
+  "DB_PASSWORD":"dev"
+}
