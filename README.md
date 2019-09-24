@@ -1,3 +1,3 @@
 # Go Blog
 
-[API Doc](https://github.com/claudioontheweb/go-blog/blob/master/ApiDoc.md)
+[API Doc](https://claudioontheweb.github.io/go-blog/ApiDoc.html)
