@@ -7,9 +7,9 @@ import (
 	"github.com/claudioontheweb/go-blog/models"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"time"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type ErrorResponse struct {

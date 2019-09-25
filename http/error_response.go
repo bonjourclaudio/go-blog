@@ -1,8 +1,8 @@
 package http
 
 import (
-	"net/http"
 	"encoding/json"
+	"net/http"
 )
 
 type ErrorResponse struct {

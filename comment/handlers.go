@@ -2,8 +2,8 @@ package comment
 
 import (
 	"encoding/json"
-	customHTTP "github.com/claudioontheweb/go-blog/http"
 	"github.com/claudioontheweb/go-blog/db"
+	customHTTP "github.com/claudioontheweb/go-blog/http"
 	"github.com/gorilla/mux"
 	"net/http"
 )

@@ -4,40 +4,42 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/claudioontheweb/go-blog/models"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"strings"
-	"github.com/dgrijalva/jwt-go"
 )
 
-//Exception struct
 type Exception models.Exception
 
-// JwtVerify Middleware function
 func JwtVerify(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var token = r.Header.Get("x-access-token") // Grab the token from the header
 
-		token = strings.TrimSpace(token)
+		// Get Token from Header
+		var tk = r.Header.Get("x-access-token")
+		tk = strings.TrimSpace(tk)
 
-		if token == "" {
-			// Token is missing, returns with error code 403 Unauthorized
-			w.WriteHeader(http.StatusForbidden)
+		// Check if no Token and return 401
+		if tk == "" {
+			w.WriteHeader(http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(Exception{Message: "Missing auth token"})
 			return
 		}
+
 		claims := &models.Token{}
 
-		_, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
+		// Parse and validate Token
+		_, err := jwt.ParseWithClaims(tk, claims, func(token *jwt.Token) (interface{}, error) {
 			return []byte("secret"), nil
 		})
-
 		if err != nil {
-			w.WriteHeader(http.StatusForbidden)
+			w.WriteHeader(http.StatusUnauthorized)
 			json.NewEncoder(w).Encode(Exception{Message: err.Error()})
 			return
 		}
 
+		// Assign Claims to context and continue with HTTP Request
 		ctx := context.WithValue(r.Context(), "user", claims)
 		next.ServeHTTP(w, r.WithContext(ctx))
+
 	})
 }
