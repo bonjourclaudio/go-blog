@@ -13,7 +13,6 @@ import (
 	"net/http"
 )
 
-
 func NewRouter() *mux.Router {
 
 	// Init Router
@@ -43,6 +42,10 @@ func NewRouter() *mux.Router {
 			routePrefix.Path(r.Pattern).Handler(handler).Methods(r.Method).Name(r.Name)
 		}
 	}
+
+	// Root Route -> API DOC as HTML
+	fileServer := http.FileServer(http.Dir("./docs/"))
+	r.Handle("/", http.StripPrefix("/", fileServer))
 
 	return r
 
