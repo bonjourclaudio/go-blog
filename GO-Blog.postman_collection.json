@@ -155,7 +155,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"Amazing Post!\",\n\t\"author_id\": 2,\n\t\"post_id\": 1\n}",
+							"raw": "{\n\t\"content\": \"Amazing Post!\",\n\t\"author_id\": 23,\n\t\"post_id\": 13\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -467,40 +467,6 @@
 					"response": []
 				},
 				{
-					"name": "Like Post",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/posts/1/like",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts/1/like",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts",
-								"1",
-								"like"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Create Post",
 					"request": {
 						"method": "POST",
@@ -514,7 +480,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"How to cook Curry\",\n\t\"content\": \"Mmmmhhh\",\n\t\"likes\": 0,\n\t\"author_id\": 3\n}",
+							"raw": "{\n\t\"title\": \"First Post\",\n\t\"content\": \"Blablablabla\",\n\t\"author_id\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -551,7 +517,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/posts/2",
+							"raw": "http://localhost:8080/posts/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -559,7 +525,7 @@
 							"port": "8080",
 							"path": [
 								"posts",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -680,7 +646,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"firstname\": \"Lara\",\n\t\"lastname\": \"Gerhard\",\n\t\"email\": \"lara.gerhard@email.com\",\n\t\"avatarUrl\": null\n}",
+							"raw": "{\n\t\"firstname\": \"Lara\",\n\t\"lastname\": \"Gerhard\",\n\t\"email\": \"lara.gerhard@email.com\",\n\t\"avatarUrl\": \"https://gravatar.com/avatar/0c6cbdd9033014a5e9692d05f34ddccf?s=400&d=robohash&r=x\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -703,11 +669,97 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Like",
+			"item": [
+				{
+					"name": "Like Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"author_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/likes/post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"likes",
+								"post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Likes Of Post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/likes/post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"likes",
+								"post",
+								"1"
+							]
+						},
+						"description": "\t"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Likes Of Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/likes/author/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"likes",
+								"author",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"variable": [
 		{
-			"id": "b6471be8-2482-433a-a285-b04ec0e3c166",
+			"id": "b2d8902f-5005-4c1b-b7cb-abdfde5fe78e",
 			"key": "baseUrl",
 			"value": "http://localhost:8080",
 			"type": "string"
