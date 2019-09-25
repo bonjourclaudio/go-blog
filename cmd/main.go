@@ -24,6 +24,8 @@ func NewRouter() *mux.Router {
 	customRouter.AppRoutes = append(customRouter.AppRoutes, post.PostRoutes)
 	// Append Tag routes
 	customRouter.AppRoutes = append(customRouter.AppRoutes, post.TagRoutes)
+	// Append Likes routes
+	customRouter.AppRoutes = append(customRouter.AppRoutes, post.LikeRoutes)
 	// Append Comment routes
 	customRouter.AppRoutes = append(customRouter.AppRoutes, comment.Routes)
 
@@ -62,7 +64,7 @@ func main() {
 	defer db.DB.Close()
 
 	// Auto migrate Models
-	db.DB.AutoMigrate(&author.Author{}, &post.Post{}, &post.Tag{}, &comment.Comment{})
+	db.DB.AutoMigrate(&author.Author{}, &post.Post{}, &post.Tag{}, &post.Like{}, &comment.Comment{})
 
 
 	log.Fatal(http.ListenAndServe(":" + port, router))

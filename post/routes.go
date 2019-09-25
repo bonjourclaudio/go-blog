@@ -32,12 +32,6 @@ var PostRoutes = router.RoutePrefix{
 			HandlerFunc: DeletePostHandler,
 		},
 		router.Route{
-			Name:        "IncrementLike",
-			Method:      "GET",
-			Pattern:     "/{postId}/like",
-			HandlerFunc: IncrementLikeHandler,
-		},
-		router.Route{
 			Name:        "GetPostsByAuthor",
 			Method:      "GET",
 			Pattern:     "/author/{authorId}",
@@ -80,5 +74,29 @@ var TagRoutes = router.RoutePrefix{
 			Pattern:     "/{tagId}",
 			HandlerFunc: DeleteTagHandler,
 		},
+	},
+}
+
+var LikeRoutes = router.RoutePrefix{
+	"/likes",
+	[]router.Route{
+		router.Route{
+		Name:        "IncrementLike",
+		Method:      "POST",
+		Pattern:     "/post/{postId}",
+		HandlerFunc: IncrementLikeHandler,
+	},
+		router.Route{
+		Name:        "GetLikesOfPost",
+		Method:      "GET",
+		Pattern:     "/post/{postId}",
+		HandlerFunc: GetLikesOfPostHandler,
+	},
+		router.Route{
+		Name:        "GetLikesOfAuthor",
+		Method:      "GET",
+		Pattern:     "/author/{authorId}",
+		HandlerFunc: GetLikesOfAuthorHandler,
+	},
 	},
 }

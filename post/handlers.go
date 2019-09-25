@@ -5,7 +5,6 @@ import (
 	"github.com/claudioontheweb/go-blog/db"
 	customHTTP "github.com/claudioontheweb/go-blog/http"
 	"github.com/gorilla/mux"
-	"github.com/jinzhu/gorm"
 	"net/http"
 )
 
@@ -62,22 +61,6 @@ func DeletePostHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		db.DB.Delete(&post, params["postId"])
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully deleted Post with ID: " + params["postId"])
-	}
-}
-
-// Increment Like of Post
-func IncrementLikeHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	params := mux.Vars(r)
-
-	var post Post
-
-	if db.DB.Where("id = ?", params["postId"]).First(&post).RecordNotFound() {
-		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Post with ID: " + params["postId"])
-	} else {
-		db.DB.Model(&post).Update("likes", gorm.Expr("likes + ?", 1))
-		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
 	}
 }
 
@@ -183,5 +166,71 @@ func DeleteTagHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		db.DB.Delete(&tag, params["tagId"])
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully deleted Tag with ID: " + params["tagId"])
+	}
+}
+
+/*
+
+##############################
+Likes
+
+ */
+// Increment Like of Post
+func IncrementLikeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+
+	var post Post
+	var like Like
+	json.NewDecoder(r.Body).Decode(&like)
+
+	if db.DB.Where("id = ?", params["postId"]).First(&post).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Post with ID: " + params["postId"])
+	} else {
+
+		err := db.DB.Model(&post).Association("Likes").Append(&like).Error
+		if err != nil {
+			panic(err)
+		}
+		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
+	}
+}
+
+func GetLikesOfPostHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+
+	var post Post
+	var likes []Like
+
+	if db.DB.Where("id = ?", params["postId"]).Find(&post).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Likes found of Post with ID: " + params["postId"])
+	} else {
+
+		db.DB.Model(&post).Related(&likes, "Likes")
+
+		db.DB.Preload("Likes").First(&post)
+
+		json.NewEncoder(w).Encode(likes)
+
+	}
+}
+
+
+func GetLikesOfAuthorHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	params := mux.Vars(r)
+
+	var likes []Like
+
+	if db.DB.Where("author_id = ?", params["authorId"]).Find(&likes).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Likes found of Author with ID: " + params["authorId"])
+	} else {
+
+		json.NewEncoder(w).Encode(likes)
+
 	}
 }
