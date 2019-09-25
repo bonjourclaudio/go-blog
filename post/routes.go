@@ -1,11 +1,13 @@
 package post
 
 import (
-"github.com/claudioontheweb/go-blog/router"
+	"github.com/claudioontheweb/go-blog/auth"
+	"github.com/claudioontheweb/go-blog/router"
 )
 
 var PostRoutes = router.RoutePrefix{
 	"/posts",
+	auth.JwtVerify,
 	[]router.Route{
 		router.Route{
 			"GetPosts",
@@ -32,10 +34,10 @@ var PostRoutes = router.RoutePrefix{
 			HandlerFunc: DeletePostHandler,
 		},
 		router.Route{
-			Name:        "GetPostsByAuthor",
+			Name:        "GetPostsByUser",
 			Method:      "GET",
-			Pattern:     "/author/{authorId}",
-			HandlerFunc: GetPostsByAuthorHandler,
+			Pattern:     "/user/{userId}",
+			HandlerFunc: GetPostsByUserHandler,
 		},
 	},
 }
@@ -43,6 +45,7 @@ var PostRoutes = router.RoutePrefix{
 
 var TagRoutes = router.RoutePrefix{
 	"/tags",
+	auth.JwtVerify,
 	[]router.Route{
 		router.Route{
 			"GetTags",
@@ -79,6 +82,7 @@ var TagRoutes = router.RoutePrefix{
 
 var LikeRoutes = router.RoutePrefix{
 	"/likes",
+	auth.JwtVerify,
 	[]router.Route{
 		router.Route{
 		Name:        "IncrementLike",
@@ -93,10 +97,10 @@ var LikeRoutes = router.RoutePrefix{
 		HandlerFunc: GetLikesOfPostHandler,
 	},
 		router.Route{
-		Name:        "GetLikesOfAuthor",
+		Name:        "GetLikesOfUser",
 		Method:      "GET",
-		Pattern:     "/author/{authorId}",
-		HandlerFunc: GetLikesOfAuthorHandler,
+		Pattern:     "/user/{userId}",
+		HandlerFunc: GetLikesOfUserHandler,
 	},
 	},
 }

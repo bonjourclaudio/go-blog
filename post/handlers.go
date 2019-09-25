@@ -64,16 +64,16 @@ func DeletePostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Get All Posts from Author
-func GetPostsByAuthorHandler(w http.ResponseWriter, r *http.Request) {
+// Get All Posts from User
+func GetPostsByUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	params := mux.Vars(r)
 
 	var posts []Post
 
-	if db.DB.Where("author_id = ?", params["authorId"]).Find(&posts).RecordNotFound() {
-		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Posts from Author with ID: " + params["authorId"])
+	if db.DB.Where("user_id = ?", params["userId"]).Find(&posts).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Posts from User with ID: " + params["userId"])
 	} else {
 		json.NewEncoder(w).Encode(posts)
 	}
@@ -219,15 +219,15 @@ func GetLikesOfPostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func GetLikesOfAuthorHandler(w http.ResponseWriter, r *http.Request) {
+func GetLikesOfUserHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	params := mux.Vars(r)
 
 	var likes []Like
 
-	if db.DB.Where("author_id = ?", params["authorId"]).Find(&likes).RecordNotFound() {
-		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Likes found of Author with ID: " + params["authorId"])
+	if db.DB.Where("user_id = ?", params["userId"]).Find(&likes).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Likes found of User with ID: " + params["userId"])
 	} else {
 
 		json.NewEncoder(w).Encode(likes)

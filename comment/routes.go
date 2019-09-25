@@ -1,11 +1,13 @@
 package comment
 
 import (
+	"github.com/claudioontheweb/go-blog/auth"
 	"github.com/claudioontheweb/go-blog/router"
 )
 
 var Routes = router.RoutePrefix{
 	"/comments",
+	auth.JwtVerify,
 	[]router.Route{
 		router.Route{
 			"GetComments",
@@ -38,10 +40,10 @@ var Routes = router.RoutePrefix{
 			GetCommentsOfPost,
 		},
 		router.Route{
-			"GetCommentsOfAuthor",
+			"GetCommentsOfUser",
 			"GET",
-			"/author/{authorId}",
-			GetCommentsOfAuthor,
+			"/user/{userId}",
+			GetCommentsOfUser,
 		},
 	},
 }

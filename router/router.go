@@ -1,11 +1,15 @@
 package router
 
-import "net/http"
+import (
+	"github.com/gorilla/mux"
+	"net/http"
+)
 
 var AppRoutes []RoutePrefix
 
 type RoutePrefix struct {
 	Prefix string
+	Middleware mux.MiddlewareFunc
 	SubRoutes []Route
 }
 

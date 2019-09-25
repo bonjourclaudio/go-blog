@@ -69,14 +69,14 @@ func GetCommentsOfPost(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Get All Comments of Author
-func GetCommentsOfAuthor(w http.ResponseWriter, r *http.Request) {
+// Get All Comments of User
+func GetCommentsOfUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	var comments []Comment
 
-	if db.DB.Where("author_id = ?", params["authorId"]).Find(&comments).RecordNotFound() {
-		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Comments of Author with ID: " + params["authorId"])
+	if db.DB.Where("user_id = ?", params["userId"]).Find(&comments).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Comments of User with ID: " + params["userId"])
 	} else {
 		json.NewEncoder(w).Encode(comments)
 	}

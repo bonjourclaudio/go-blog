@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/claudioontheweb/go-blog/author"
+	"github.com/claudioontheweb/go-blog/auth"
 	"github.com/claudioontheweb/go-blog/comment"
 	"github.com/claudioontheweb/go-blog/config"
 	"github.com/claudioontheweb/go-blog/db"
+	"github.com/claudioontheweb/go-blog/http/middleware"
 	"github.com/claudioontheweb/go-blog/post"
 	customRouter "github.com/claudioontheweb/go-blog/router"
 	"github.com/gorilla/mux"
@@ -18,8 +19,8 @@ func NewRouter() *mux.Router {
 	// Init Router
 	r := mux.NewRouter()
 
-	// Append Author routes
-	customRouter.AppRoutes = append(customRouter.AppRoutes, author.Routes)
+	r.Use(middleware.CommonHandler)
+
 	// Append Post routes
 	customRouter.AppRoutes = append(customRouter.AppRoutes, post.PostRoutes)
 	// Append Tag routes
@@ -28,11 +29,20 @@ func NewRouter() *mux.Router {
 	customRouter.AppRoutes = append(customRouter.AppRoutes, post.LikeRoutes)
 	// Append Comment routes
 	customRouter.AppRoutes = append(customRouter.AppRoutes, comment.Routes)
+	// Append Auth routes
+	customRouter.AppRoutes = append(customRouter.AppRoutes, auth.Routes)
+	// Append User routes
+	customRouter.AppRoutes = append(customRouter.AppRoutes, auth.UserRoutes)
 
 	for _, route := range customRouter.AppRoutes {
 
 		// Create subroute
 		routePrefix := r.PathPrefix(route.Prefix).Subrouter()
+
+		// Use Middleware if exists
+		if route.Middleware != nil {
+			routePrefix.Use(route.Middleware)
+		}
 
 		// Loop through each subroute
 
@@ -64,7 +74,7 @@ func main() {
 	defer db.DB.Close()
 
 	// Auto migrate Models
-	db.DB.AutoMigrate(&author.Author{}, &post.Post{}, &post.Tag{}, &post.Like{}, &comment.Comment{})
+	db.DB.AutoMigrate(&auth.User{}, &post.Post{}, &post.Tag{}, &post.Like{}, &comment.Comment{})
 
 
 	log.Fatal(http.ListenAndServe(":" + port, router))

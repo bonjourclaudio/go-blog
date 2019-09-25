@@ -9,6 +9,6 @@ type Comment struct {
 
 	Content string `json:"content"`
 
-	AuthorID uint `json:"author_id"`
+	UserID uint `json:"user_id"`
 	PostID uint `json:"post_id"`
 }

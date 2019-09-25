@@ -12,7 +12,7 @@ type Post struct {
 	Tags []Tag `gorm:"many2many:post_tags" json:"-"`
 	Likes []Like `gorm:"many2many:post_likes" json:"-"`
 
-	AuthorID uint `json:"author_id"`
+	UserID uint `json:"user_id"`
 }
 
 type Tag struct {
@@ -24,5 +24,5 @@ type Tag struct {
 type Like struct {
 	gorm.Model
 
-	AuthorID uint `json:"author_id"`
+	UserID uint `json:"user_id"`
 }
