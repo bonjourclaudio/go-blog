@@ -493,7 +493,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Firstname\": \"Claudio\",\n\t\"Lastname\": \"Weckherlin\",\n\t\"Email\": \"claudio.weckherlin@gmail.com\",\n\t\"password\": \"Test1234\"\n}",
+							"raw": "{\n\t\"Firstname\": \"John\",\n\t\"Lastname\": \"Doe\",\n\t\"Email\": \"john@doe.com\",\n\t\"password\": \"Test1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -529,7 +529,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Email\": \"claudio.weckherlin@gmail.com\",\n\t\"Password\": \"Test1234\"\n}",
+							"raw": "{\n\t\"Email\": \"john@doe.com\",\n\t\"Password\": \"Test1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -610,7 +610,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"Lastname\": \"Bürgi\"\n}",
+							"raw": "{\n\t\"Lastname\": \"Miller\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -732,7 +732,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Test\",\n\t\"content\": \"Test\",\n\t\"user_id\": 4\n}",
+							"raw": "{\n\t\"title\": \"My first post!\",\n\t\"content\": \"Content\",\n\t\"user_id\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -779,7 +779,7 @@
 	],
 	"variable": [
 		{
-			"id": "31bf9b3d-f2c6-4929-bd1d-c875aa20c549",
+			"id": "f8156d2e-87e5-485d-b5f8-3ec44d6c3346",
 			"key": "baseUrl",
 			"value": "http://localhost:8080",
 			"type": "string"
