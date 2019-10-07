@@ -155,7 +155,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"content\": \"Amazing Post!\",\n\t\"author_id\": 23,\n\t\"post_id\": 13\n}",
+							"raw": "{\n\t\"content\": \"Amazing Post!\",\n\t\"author_id\": 4,\n\t\"post_id\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -214,10 +214,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\tcontent: Tech\n}"
+							"raw": "{\n\t\"content\": \"Tech\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/tags/post/1",
+							"raw": "http://localhost:8080/tags/post/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -226,7 +226,7 @@
 							"path": [
 								"tags",
 								"post",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -347,7 +347,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/tags/8",
+							"raw": "http://localhost:8080/tags/post/2/tag/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -355,313 +355,10 @@
 							"port": "8080",
 							"path": [
 								"tags",
-								"8"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Post",
-			"item": [
-				{
-					"name": "Get All Posts",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/posts",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Posts Of Author",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/posts/author/1",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts/author/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts",
-								"author",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Post By ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/posts/1",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Post",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"First Post\",\n\t\"content\": \"Blablablabla\",\n\t\"author_id\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Post",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/posts/2",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/posts/5",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"posts",
-								"5"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Author",
-			"item": [
-				{
-					"name": "Get All Authors",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/authors",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/authors",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authors"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Author By ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/authors/2",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/authors/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authors",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Author By ID",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "http://localhost:8080/authors/1",
-									"value": "",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:8080/authors/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authors",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create Author",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"firstname\": \"Lara\",\n\t\"lastname\": \"Gerhard\",\n\t\"email\": \"lara.gerhard@email.com\",\n\t\"avatarUrl\": \"https://gravatar.com/avatar/0c6cbdd9033014a5e9692d05f34ddccf?s=400&d=robohash&r=x\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/authors",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"authors"
+								"post",
+								"2",
+								"tag",
+								"4"
 							]
 						}
 					},
@@ -687,7 +384,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"author_id\": 1\n}",
+							"raw": "{\n\t\"user_id\": 4\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -695,7 +392,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/likes/post/1",
+							"raw": "http://localhost:8080/likes/post/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -704,7 +401,7 @@
 							"path": [
 								"likes",
 								"post",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -752,6 +449,329 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Like",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/likes/post/2/like/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"likes",
+								"post",
+								"2",
+								"like",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Firstname\": \"Claudio\",\n\t\"Lastname\": \"Weckherlin\",\n\t\"Email\": \"claudio.weckherlin@gmail.com\",\n\t\"password\": \"Test1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Email\": \"claudio.weckherlin@gmail.com\",\n\t\"Password\": \"Test1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Lastname\": \"Bürgi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Posts Of User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/posts/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test\",\n\t\"content\": \"Test\",\n\t\"user_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Post",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -759,7 +779,7 @@
 	],
 	"variable": [
 		{
-			"id": "b2d8902f-5005-4c1b-b7cb-abdfde5fe78e",
+			"id": "31bf9b3d-f2c6-4929-bd1d-c875aa20c549",
 			"key": "baseUrl",
 			"value": "http://localhost:8080",
 			"type": "string"
