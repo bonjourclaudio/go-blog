@@ -82,7 +82,7 @@ func GetPostsByUserHandler(w http.ResponseWriter, r *http.Request) {
 
 /*
 
-##################################
+##################§################
 Tags
 
 */
@@ -148,10 +148,7 @@ func CreateTagHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err)
 		}
-
 		json.NewEncoder(w).Encode(tag)
-
-		// customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully created new Tag")
 	}
 }
 
@@ -160,13 +157,19 @@ func DeleteTagHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	var tag Tag
+	var post Post
 
-	if db.DB.Where("id = ?", params["tagId"]).First(&tag).RecordNotFound() {
+	if db.DB.Where("id = ?", params["postId"]).First(&post).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Post with ID: " + params["postId"])
+	} else if db.DB.Where("id = ?", params["tagId"]).First(&tag).RecordNotFound(){
 		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Tag with ID: " + params["tagId"])
 	} else {
-		db.DB.Delete(&tag, params["tagId"])
+		db.DB.Model(&post).Association("Tags").Delete(&tag)
+		db.DB.Delete(&tag)
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully deleted Tag with ID: " + params["tagId"])
 	}
+
+
 }
 
 /*
@@ -232,5 +235,23 @@ func GetLikesOfUserHandler(w http.ResponseWriter, r *http.Request) {
 
 		json.NewEncoder(w).Encode(likes)
 
+	}
+}
+
+// Delete Like
+func DeleteLikeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	var like Like
+	var post Post
+
+	if db.DB.Where("id = ?", params["postId"]).First(&post).RecordNotFound() {
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Post with ID: " + params["postId"])
+	} else if db.DB.Where("id = ?", params["likeId"]).First(&like).RecordNotFound(){
+		customHTTP.NewErrorResponse(w, http.StatusNotFound, "No Like with ID: " + params["tagId"])
+	} else {
+		db.DB.Model(&post).Association("Likes").Delete(&like)
+		db.DB.Delete(&like)
+		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully deleted Like with ID: " + params["tagId"])
 	}
 }

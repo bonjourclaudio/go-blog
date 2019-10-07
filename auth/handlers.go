@@ -50,7 +50,7 @@ func FindOne(email, password string) map[string]interface{} {
 		return resp
 	}
 
-	tk := models.Token{
+	tk := models.CustomClaims{
 		UserID: user.ID,
 		Firstname: user.Firstname,
 		Lastname: user.Lastname,

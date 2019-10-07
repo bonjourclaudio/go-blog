@@ -74,7 +74,7 @@ var TagRoutes = router.RoutePrefix{
 		{
 			Name:        "DeleteTag",
 			Method:      "DELETE",
-			Pattern:     "/{tagId}",
+			Pattern:     "/post/{postId}/tag/{tagId}",
 			HandlerFunc: DeleteTagHandler,
 		},
 	},
@@ -101,6 +101,12 @@ var LikeRoutes = router.RoutePrefix{
 			Method:      "GET",
 			Pattern:     "/user/{userId}",
 			HandlerFunc: GetLikesOfUserHandler,
+		},
+		{
+			Name:		"DeleteLikeHandler",
+			Method:		"DELETE",
+			Pattern:	"/post/{postId}/like/{likeId}",
+			HandlerFunc: DeleteLikeHandler,
 		},
 	},
 }
