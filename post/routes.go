@@ -1,52 +1,50 @@
 package post
 
 import (
-	"github.com/claudioontheweb/go-blog/auth"
-	"github.com/claudioontheweb/go-blog/router"
+	"github.com/claudioontheweb/go-blog/customRouter"
 )
 
-var PostRoutes = router.RoutePrefix{
-	"/posts",
-	auth.JwtVerify,
-	[]router.Route{
-		{
-			"GetPosts",
-			"GET",
-			"",
-			GetPostsHandler,
+var PostRoutes = customRouter.RoutePrefix{
+	IsSecure:  true,
+	Prefix: "/posts",
+	SubRoutes: []customRouter.Route{
+			{
+				Name: "GetPosts",
+				Method: "GET",
+				Pattern: "",
+				HandlerFunc: GetPostsHandler,
+			},
+			{
+				Name: "GetPost",
+				Method: "GET",
+				Pattern: "/{postId}",
+				HandlerFunc: GetPostHandler,
+			},
+			{
+				Name:        "CreatePost",
+				Method:      "POST",
+				Pattern:     "",
+				HandlerFunc: CreatePostHandler,
+			},
+			{
+				Name:        "DeletePost",
+				Method:      "DELETE",
+				Pattern:     "/{postId}",
+				HandlerFunc: DeletePostHandler,
+			},
+			{
+				Name:        "GetPostsByUser",
+				Method:      "GET",
+				Pattern:     "/user/{userId}",
+				HandlerFunc: GetPostsByUserHandler,
+			},
 		},
-		{
-			"GetPost",
-			"GET",
-			"/{postId}",
-			GetPostHandler,
-		},
-		{
-			Name:        "CreatePost",
-			Method:      "POST",
-			Pattern:     "",
-			HandlerFunc: CreatePostHandler,
-		},
-		{
-			Name:        "DeletePost",
-			Method:      "DELETE",
-			Pattern:     "/{postId}",
-			HandlerFunc: DeletePostHandler,
-		},
-		{
-			Name:        "GetPostsByUser",
-			Method:      "GET",
-			Pattern:     "/user/{userId}",
-			HandlerFunc: GetPostsByUserHandler,
-		},
-	},
 }
 
-
-var TagRoutes = router.RoutePrefix{
-	"/tags",
-	auth.JwtVerify,
-	[]router.Route{
+var TagRoutes = customRouter.RoutePrefix {
+	IsSecure: true,
+	Prefix:   "/tags",
+	SubRoutes: []customRouter.Route{
 		{
 			"GetTags",
 			"GET",
@@ -80,10 +78,10 @@ var TagRoutes = router.RoutePrefix{
 	},
 }
 
-var LikeRoutes = router.RoutePrefix{
-	"/likes",
-	auth.JwtVerify,
-	[]router.Route{
+var LikeRoutes = customRouter.RoutePrefix{
+	IsSecure: true,
+	Prefix:   "/likes",
+	SubRoutes: []customRouter.Route{
 		{
 			Name:        "IncrementLike",
 			Method:      "POST",

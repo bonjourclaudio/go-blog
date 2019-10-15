@@ -1,15 +1,14 @@
-package router
+package customRouter
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
 )
 
-var AppRoutes []RoutePrefix
+var Routes []RoutePrefix
 
 type RoutePrefix struct {
+	IsSecure bool
 	Prefix string
-	Middleware mux.MiddlewareFunc
 	SubRoutes []Route
 }
 

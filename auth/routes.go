@@ -1,13 +1,11 @@
 package auth
 
-import (
-	"github.com/claudioontheweb/go-blog/router"
-)
+import "github.com/claudioontheweb/go-blog/customRouter"
 
-var Routes = router.RoutePrefix{
-	"/auth",
-	nil,
-	[]router.Route{
+var Routes = customRouter.RoutePrefix{
+	IsSecure: false,
+	Prefix:   "/auth",
+	SubRoutes: []customRouter.Route{
 		{
 			"CreateUser",
 			"POST",
@@ -23,10 +21,10 @@ var Routes = router.RoutePrefix{
 	},
 }
 
-var UserRoutes = router.RoutePrefix{
-	"/user",
-	JwtVerify,
-	[]router.Route{
+var UserRoutes = customRouter.RoutePrefix{
+	IsSecure: true,
+	Prefix:   "/user",
+	SubRoutes: []customRouter.Route{
 		{
 			"GetUsers",
 			"GET",

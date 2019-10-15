@@ -1,14 +1,13 @@
 package comment
 
 import (
-	"github.com/claudioontheweb/go-blog/auth"
-	"github.com/claudioontheweb/go-blog/router"
+	"github.com/claudioontheweb/go-blog/customRouter"
 )
 
-var Routes = router.RoutePrefix{
-	"/comments",
-	auth.JwtVerify,
-	[]router.Route{
+var Routes = customRouter.RoutePrefix{
+	IsSecure: true,
+	Prefix:   "/comments",
+	SubRoutes: []customRouter.Route{
 		{
 			"GetComments",
 			"GET",

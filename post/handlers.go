@@ -197,6 +197,7 @@ func IncrementLikeHandler(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
+		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
 	}
 }
 
