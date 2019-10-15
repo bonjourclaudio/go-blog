@@ -110,25 +110,37 @@ func UpdateUserHandler(w http.ResponseWriter, r *http.Request) {
 	user := &User{}
 	params := mux.Vars(r)
 	var id = params["id"]
-	db.DB.First(&user, id)
-	json.NewDecoder(r.Body).Decode(user)
-	db.DB.Save(&user)
-	json.NewEncoder(w).Encode(&user)
+
+	if db.DB.Where("id = ?", id).First(&user).RecordNotFound() {
+		json.NewEncoder(w).Encode("No user with the requested ID")
+	} else {
+		json.NewDecoder(r.Body).Decode(user)
+		db.DB.Save(&user)
+		json.NewEncoder(w).Encode(&user)
+	}
 }
 
 func DeleteUserHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var id = params["id"]
 	var user User
-	db.DB.First(&user, id)
-	db.DB.Delete(&user)
-	json.NewEncoder(w).Encode("User deleted")
+	if db.DB.Where("id = ?", id).First(&user).RecordNotFound() {
+		json.NewEncoder(w).Encode("No user with the requested ID")
+	} else {
+		db.DB.Delete(&user)
+		json.NewEncoder(w).Encode("User deleted")
+	}
 }
 
 func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var id = params["id"]
 	var user User
-	db.DB.First(&user, id)
-	json.NewEncoder(w).Encode(&user)
+
+	if db.DB.Where("id = ?", id).First(&user).RecordNotFound() {
+		json.NewEncoder(w).Encode("No user with the requested ID")
+	} else {
+		json.NewEncoder(w).Encode(&user)
+	}
+
 }
