@@ -168,8 +168,6 @@ func DeleteTagHandler(w http.ResponseWriter, r *http.Request) {
 		db.DB.Delete(&tag)
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully deleted Tag with ID: " + params["tagId"])
 	}
-
-
 }
 
 /*
@@ -196,7 +194,6 @@ func IncrementLikeHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			panic(err)
 		}
-		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
 		customHTTP.NewSuccessResponse(w, http.StatusOK, "Successfully increased likes of Post with ID: " + params["postId"])
 	}
 }

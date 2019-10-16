@@ -120,7 +120,6 @@ func jwtVerify(next http.Handler) http.Handler {
 
 		// Declare claims struct
 		claims := &models.CustomClaims{}
-
 		// Parse and validate Token
 		_, err := jwt.ParseWithClaims(tk, claims, func(token *jwt.Token) (interface{}, error) {
 			return []byte("secret"), nil
